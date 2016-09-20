@@ -45,6 +45,7 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 	vertical-align: middle;
 	height: 31px;
 	width: 49px;
+	margin-top: -7px;
 }
 
 .fri-plask {
@@ -56,6 +57,21 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 	vertical-align: middle;
 	height: 12px;
 	width: 22px;
+}
+
+
+@media only screen and (max-width: 480px) {
+	.fri-phone {
+		display: none;
+	}
+
+	.fri-plask {
+		display: none;
+	}
+
+	.fri-instagram {
+		display: none;
+	}
 }
 
 .fri-photo {
@@ -428,6 +444,13 @@ a:hover {
 	padding-right: 20px;
 	margin-bottom: 20px;
 }
+
+.header__info-span {
+	display: inline-block;
+	vertical-align: bottom;
+	width: 90%;
+	float: right;
+}
 @media only screen and (max-width: 906px) {
 	.b-header .b-header__info {
 		margin: 30px 0;
@@ -435,9 +458,18 @@ a:hover {
 }
 .b-header .b-header__info_text {
 	line-height: 1;
+	width: 90%;
 }
 .b-header .b-header__info_text > span {
 	margin: 0 0 0 10px;
+}
+
+@media only screen and (max-width: 480px) {
+	.b-header .b-header__info_text > span {
+		margin: 0;
+		display: block;
+		width: 100%;
+	}
 }
 
 .b-nav {
@@ -841,6 +873,14 @@ a:hover {
 	line-height: 53px;
 	font-size: 13px;
 	color: #CFCAB3;
+}
+
+@media only screen and (max-width: 375px) {
+	.b-footer .b-footer__info {
+		line-height: 1;
+		padding-top: 8px;
+		text-align: center!important;
+	}
 }
 
 .error-file-text.active {

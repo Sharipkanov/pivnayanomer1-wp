@@ -47,7 +47,7 @@
 						<section class="b-header__info">
 							<p class="b-header__info_text uk-clearfix">
 								<i class="fri fri-plask"></i>
-								<span><?=get_field('header_info', 4);?></span>
+								<span class="header__info-span"><?=get_field('header_info', 4);?></span>
 							</p>
 						</section>
 					</div>

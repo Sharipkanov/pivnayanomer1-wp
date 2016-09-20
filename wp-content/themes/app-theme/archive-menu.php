@@ -35,7 +35,7 @@ get_sidebar();
                     if(isset($_GET['p']) && $_GET['p'] == $val->slug) $active = 'uk-active';
                     else $active = '';
                 } else {
-                    $url = $parentCat->slug;
+                    $url = '/' . $parentCat->slug;
                     $active = 'uk-active';
 
                     if(isset($_GET['p'])) $active = '';
