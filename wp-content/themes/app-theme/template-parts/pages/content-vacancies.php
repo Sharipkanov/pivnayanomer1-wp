@@ -20,26 +20,30 @@
     <p class="uk-article-lead"><?php the_content(); ?></p>
 </article>
 <br>
-<form action="" class="uk-form">
+<form action="/vacancies-ajax" class="uk-form" method="post" enctype="multipart/form-data">
     <div class="uk-form-row">
         <label>Ваше имя*</label>
-        <input type="text" placeholder="" required>
+        <input type="text" placeholder="" name="fullname">
     </div>
     <div class="uk-form-row">
         <label>Телефон*</label>
-        <input type="text" placeholder="" required>
+        <input type="text" placeholder="" name="phone">
     </div>
     <div class="uk-form-row">
         <label>Возраст*</label>
-        <input type="text" placeholder="" required>
+        <input type="text" placeholder="" name="age">
     </div>
     <div class="uk-form-row">
         <label>Сообщение*</label>
-        <textarea></textarea>
+        <textarea name="messange"></textarea>
     </div>
     <div class="uk-form-row">
         <label>Резюме</label>
-        <input type="file" name="" id="">
+        <input type="file" name="resume" id="resumeFile">
+        <div>
+            <p class="file-text success-file-text">Фотмат файла соответствует</p>
+            <p class="file-text error-file-text">Не правильный формат файла <br> Файл должен быть в формате "jpeg", "jpg", "png", "pdf", "txt", "doc" или "docx"</p>
+        </div>
     </div>
     <p>Поля, обязательные для заполнения, помечены*.</p>
     <div class="uk-form-row">

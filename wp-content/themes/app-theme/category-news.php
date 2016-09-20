@@ -26,7 +26,21 @@ get_sidebar();
 
         <ul class="uk-list page-list normal-content">
             <?php foreach($newsCats as $key => $val) : ?>
-            <li><a href="?y=<?=$val->name; ?>"><?=$val->name; ?></a></li>
+            <?php
+                if ($key != 0) {
+                    $slug = explode('-', $val->slug);
+                    $url = '?y=' . $slug[1];
+
+                    if(isset($_GET['y']) && $_GET['y'] == $slug[1]) $active = 'uk-active';
+                    else $active = '';
+                } else {
+                    $url = get_queried_object()->slug;
+                    $active = 'uk-active';
+
+                    if(isset($_GET['y'])) $active = '';
+                }
+            ?>
+            <li class="<?=$active; ?>"><a href="<?=$url; ?>"><?=$val->name; ?></a></li>
             <?php endforeach; ?>
         </ul>
 

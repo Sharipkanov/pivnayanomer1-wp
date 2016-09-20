@@ -123,6 +123,10 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 	}
 }
 
+.uk-button-primary:focus {
+	background: #a06d3a;
+}
+
 .uk-button-primary, .uk-form input[type=submit].uk-button-primary,
 .uk-form button[type=submit].uk-button-primary {
 	background: #a06d3a;
@@ -135,7 +139,6 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 	padding: 0 5px;
 	text-transform: lowercase;
 	position: relative;
-	margin-left: 6px;
 }
 .uk-button-primary::before, .uk-form input[type=submit].uk-button-primary::before,
 .uk-form button[type=submit].uk-button-primary::before {
@@ -380,6 +383,10 @@ a:hover {
 
 .-transition {
 	transition: all 0.2s ease-in-out;
+}
+
+.-small-text {
+
 }
 
 .-margin-top-40 {
@@ -700,6 +707,13 @@ a:hover {
 	display: flex;
 	margin-bottom: 15px;
 }
+
+.menu-article .product-excerpt {
+	margin-top: -15px;
+	display: block;
+	font-size: 13px;
+}
+
 .menu-article li span {
 	flex: 0 1 auto;
 }
@@ -827,4 +841,32 @@ a:hover {
 	line-height: 53px;
 	font-size: 13px;
 	color: #CFCAB3;
+}
+
+.error-file-text.active {
+	display: block;
+	color: red;
+	border: 1px solid red;
+}
+
+.success-file-text.active {
+	display: block;
+	color: green;
+	border: 1px solid green;
+}
+
+.file-text {
+	display: none;
+	border: 1px solid transparent;
+	padding: 5px;
+	margin: 10px 0 0 0;
+}
+
+.entry-content {
+	margin: 30px 0;
+}
+
+.entry-content img {
+	border: 5px solid #fff;
+	box-shadow: 0 0 5px #aaa;
 }

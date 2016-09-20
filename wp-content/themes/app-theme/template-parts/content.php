@@ -9,24 +9,34 @@
 
 ?>
 
+<div class="b-page__info">
+	<h2 class="b-page__info_title">Новости</h2>
+	<img src="<?php bloginfo('template_url'); ?>/images/news-page-img.jpg" alt="" class="-img-responsive">
+</div>
+
+<?php
+
+$category = get_category_by_slug( 'news' );
+
+$newsCats = get_categories(array(
+	'order' => 'DESC',
+	'parent'  => $category->term_id
+));
+?>
+
+<ul class="uk-list page-list normal-content">
+	<?php foreach($newsCats as $key => $val) : ?>
+		<li><a href="news?y=<?=$val->name; ?>"><?=$val->name; ?></a></li>
+	<?php endforeach; ?>
+</ul>
+
+<div>
+	<a href="/news" class="uk-button uk-button-primary">вернуться к списку</a>
+</div>
+
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header class="entry-header">
-		<?php
-		if ( is_single() ) :
-			the_title( '<h1 class="entry-title">', '</h1>' );
-		else :
-			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
-		endif;
-
-		if ( 'post' === get_post_type() ) : ?>
-		<div class="entry-meta">
-			<?php app_theme_posted_on(); ?>
-		</div><!-- .entry-meta -->
-		<?php
-		endif; ?>
-	</header><!-- .entry-header -->
-
 	<div class="entry-content">
+		<h3><?php the_title(); ?></h3>
 		<?php
 			the_content( sprintf(
 				/* translators: %s: Name of current post. */
@@ -39,9 +49,9 @@
 				'after'  => '</div>',
 			) );
 		?>
-	</div><!-- .entry-content -->
-
-	<footer class="entry-footer">
-		<?php app_theme_entry_footer(); ?>
-	</footer><!-- .entry-footer -->
+	</div>
 </article><!-- #post-## -->
+
+<div>
+	<a href="/news" class="uk-button uk-button-primary">вернуться к списку</a>
+</div>

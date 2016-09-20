@@ -25,13 +25,14 @@
 			<header class="b-header">
 				<div class="uk-grid uk-grid-large" data-uk-grid-margin>
 					<div class="b-header__logo uk-width-small-1-1 uk-width-medium-1-3">
-						<a href="/"><img src="<?php bloginfo('template_url')?>/images/logo.png" alt="" class="b-header__logo_iteself"></a>
+						<?php $logoInfo = get_field('logo', 4);?>
+						<a href="/"><img src="<?=$logoInfo['url'];?>" alt="" class="b-header__logo_iteself"></a>
 					</div>
 					<div class="uk-width-small-1-1 uk-width-medium-2-3">
 						<section class="b-header__info uk-clearfix">
 							<p class="b-header__info_text -text-large uk-float-left uk-clearfix">
 								<i class="fri fri-phone"></i>
-								<span>+7 (3462) 94-10-10</span>
+								<span><?=get_field('header_phone', 4);?></span>
 							</p>
 							<a href="#" class="uk-float-right"><i class="fri fri-instagram"></i></a>
 						</section>
@@ -46,7 +47,7 @@
 						<section class="b-header__info">
 							<p class="b-header__info_text uk-clearfix">
 								<i class="fri fri-plask"></i>
-								<span>г. Сургут, ТРЦ «Вершина», улица Генерала Иванова, 1, 1-й этаж <br> часы работы: ВС-ЧТ:12 00-02 00, ПТ-СБ:12 00-04 00.</span>
+								<span><?=get_field('header_info', 4);?></span>
 							</p>
 						</section>
 					</div>

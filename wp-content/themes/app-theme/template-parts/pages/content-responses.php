@@ -19,45 +19,74 @@
 </div>
 
 <h4 class="page-italic-title"><i><?=$postCustom['welcome-title'][0];?></i></h4>
-<article class="responses-article uk-article">
-    <p class="uk-article-meta">28.05.2016</p>
-    <div>
-        <small>отзыв:</small>
-    </div>
-    <p class="uk-article-lead">
-        Мне хотелось бы выразить огромнейшую благодарность и признательность всем тем, кто помог мне
-        поздравить мою лучшую подругу с Днём Рождения в режиме он-лайн, за 3 тысячи километров!!! Я
-        безумно благодарна Евгению, что откликнулся на мою просьбу и все сделали на отлично! Спасибо
-        группе Фанни Каплан за личное поздравление моей подруги!!! И я , и она в полнейшем
-        восторге!!! Очень рада, что сюрприз удался!!! Я искренне тронута тем, что на мою просьбу о
-        поздравлении подруги на расстоянии так искренне и живо откликнулись администраторы вашего
-        чудесного ресторана!!! В свою очередь, обещаю лично посетить ваше замечательное место!!!
-        Слов действительно не подобрать!!!! Я на эмоциях!! Но я настолько приятно поражена, что
-        сложно подобрать слова!! Рекомендую это чудесное заведение всем-всем-всем!!!! Здесь реально
-        есть подход к каждому клиенту!!!!не говоря уже про отличную кухню и живой звук !
-    </p>
-    <p>Ирина Баева ( Иваново )</p>
-</article>
+<?php
+    $comments = get_approved_comments(get_the_ID());
+
+    $sortedComments = array();
+
+    foreach ($comments as $key => $value) {
+
+        if ($value->comment_parent != 0) {
+            $sortedComments[$value->comment_parent]->answer = $value;
+        } else {
+            $sortedComments[$value->comment_ID] = $value;
+        }
+    }
+?>
+
+<?php foreach ($sortedComments as $key => $val) : ?>
 <article class="responses-article uk-article">
     <div>
-        <p class="uk-article-meta">14.01.2015</p>
+        <p class="uk-article-meta"><?=get_the_date( 'd.m.Y', $val->comment_ID );?></p>
         <div>
             <small>отзыв:</small>
         </div>
-        <p class="uk-article-lead">
-            Любим ваше заведение! Очень бы хотелось увидеть программу выступлений на январь 2015
-            года.
-        </p>
-        <p>Мария</p>
+        <p class="uk-article-lead"><?=$val->comment_content; ?></p>
+        <p><?=$val->comment_author;?></p>
     </div>
+    <?php if($val->answer) : ?>
     <div>
         <div>
             <small>наш коментарий:</small>
         </div>
-        <p class="uk-article-lead">
-            Уважаемая Мария! <br>
-            График выступлений музыкальных коллективов всегда можно посмотреть на нашем сайте в
-            разделе "Новости".
-        </p>
+        <p class="uk-article-lead"><?=$val->answer->comment_content;?></p>
     </div>
+    <?php endif; ?>
 </article>
+<?php endforeach; ?>
+
+<?php if(!is_admin()) : ?>
+<div id="add-review" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+        <?php
+            $fields =  array(
+
+                'author' =>
+                    '<p class="uk-form-row"><label for="author">' . __( 'Ваше имя*', 'domainreference' ) . '</label> ' .
+                    ( $req ? '<span class="required">*</span>' : '' ) .
+                    '<input id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) .
+                    '" size="30"' . $aria_req . ' /></p>',
+
+                'email' =>
+                    '<p class="uk-form-row"><label for="email">' . __( 'Email*', 'domainreference' ) . '</label> ' .
+                    ( $req ? '<span class="required">*</span>' : '' ) .
+                    '<input id="email" name="email" type="text" value="' . esc_attr(  $commenter['comment_author_email'] ) .
+                    '" size="30"' . $aria_req . ' /></p>'
+            );
+
+            // If comments are open or we have at least one comment, load up the comment template.
+            if ( comments_open() || get_comments_number() ) :
+                comment_form(array(
+                    'class_form'      => 'uk-form',
+                    'class_submit'      => 'uk-button uk-button-primary',
+                    'name_submit'       => 'submit',
+                    'comment_notes_before' => '<p class="">Мы заинтересованы в безупречном обслуживании наших гостей. <br> И благодарны
+                                                всем, оставившим свои отзывы о нашем ресторане.</p><p>Поля, обязательные для заполнения, помечены*.</p>',
+                    'fields' => apply_filters( 'comment_form_default_fields', $fields )
+                ));
+            endif;
+        ?>
+    </div>
+</div>
+<?php endif; ?>

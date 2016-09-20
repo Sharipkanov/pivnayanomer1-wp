@@ -70,6 +70,7 @@ get_sidebar();
 
                     <ul class="uk-list">
                         <?php foreach ($products as $productKey => $productVal) : ?>
+                            <?php $productTag = wp_get_post_tags($productVal->ID); ?>
                             <?php $productImg = get_the_post_thumbnail_url($productVal->ID); ?>
                             <li>
                                 <span>
@@ -82,6 +83,10 @@ get_sidebar();
                                 <span class="has-dots"><i></i></span>
                                 <span class="price"><?=types_render_field( "product-price", array("id" => $productVal->ID) ); ?></span>
                             </li>
+                            <?php $productExcerpt =  types_render_field( "product-excerpt", array("id" => $productVal->ID) ); ?>
+                            <?php if($productExcerpt) : ?>
+                                <p class="product-excerpt"><?=$productExcerpt; ?></p>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </ul>
                 </article>
