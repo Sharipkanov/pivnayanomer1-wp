@@ -20,23 +20,34 @@ $category = get_category_by_slug( 'news' );
 
 $newsCats = get_categories(array(
 	'order' => 'DESC',
-	'parent'  => $category->term_id
+	'parent'  => $category->term_id,
+	'posts_per_page' => -1
 ));
 ?>
 
 <ul class="uk-list page-list normal-content">
-	<?php foreach($newsCats as $key => $val) : ?>
-		<li><a href="news?y=<?=$val->name; ?>"><?=$val->name; ?></a></li>
+	<?php foreach($newsCats as $key => $val) :
+
+		if ($key != 0) {
+			$slug = explode('-', $val->slug);
+			$url = '/news?y=' . $slug[1];
+		} else {
+			$url = '/news';
+		}
+
+		?>
+		<li><a href="<?=$url; ?>"><?=$val->name; ?></a></li>
 	<?php endforeach; ?>
 </ul>
 
-<div>
+<div class="uk-clearfix">
 	<a href="/news" class="uk-button uk-button-primary">вернуться к списку</a>
 </div>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<div class="entry-content">
+	<div class="entry-content uk-clearfix">
 		<h3><?php the_title(); ?></h3>
+		<p class="content-small"><?=get_the_date( 'd.m.Y', get_the_ID() );?></p>
 		<?php
 			the_content( sprintf(
 				/* translators: %s: Name of current post. */
@@ -52,6 +63,6 @@ $newsCats = get_categories(array(
 	</div>
 </article><!-- #post-## -->
 
-<div>
+<div class="uk-clearfix">
 	<a href="/news" class="uk-button uk-button-primary">вернуться к списку</a>
 </div>

@@ -910,3 +910,20 @@ a:hover {
 	border: 5px solid #fff;
 	box-shadow: 0 0 5px #aaa;
 }
+
+.alignleft {
+	float: left;
+	margin: 0 10px 10px 0;
+}
+
+.alignright {
+	float: right;
+	margin: 0 0 10px 10px;
+}
+
+.content-small {
+	font-size: 14px;
+	color: #666;
+}
+
+.ali

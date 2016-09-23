@@ -29,12 +29,12 @@ get_sidebar();
             <?php
                 if ($key != 0) {
                     $slug = explode('-', $val->slug);
-                    $url = '?y=' . $slug[1];
+                    $url = '/news?y=' . $slug[1];
 
                     if(isset($_GET['y']) && $_GET['y'] == $slug[1]) $active = 'uk-active';
                     else $active = '';
                 } else {
-                    $url = get_queried_object()->slug;
+                    $url = '/news' . get_queried_object()->slug;
                     $active = 'uk-active';
 
                     if(isset($_GET['y'])) $active = '';

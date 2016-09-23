@@ -34,7 +34,7 @@ get_sidebar();
                         if(isset($_GET['p']) && $_GET['p'] == $val->post_name) $active = 'uk-active';
                         else $active = '';
                     } else {
-                        $url = get_queried_object()->name;
+                        $url = '/' . get_queried_object()->name;
                         $active = 'uk-active';
 
                         if(isset($_GET['p'])) $active = '';

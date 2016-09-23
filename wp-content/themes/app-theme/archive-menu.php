@@ -22,7 +22,8 @@ get_sidebar();
 
             $menuCats = get_categories(array(
                 'parent'  => $parentCat->term_id,
-                'order' => 'DESC'
+                'order' => 'DESC',
+                'posts_per_page' => -1
             ));
         ?>
 
@@ -52,8 +53,13 @@ get_sidebar();
                 } else $currentCat = $menuCats[0];
 
                 $childCats = get_categories(array(
-                    'parent'  => $currentCat->term_id
+                    'parent'  => $currentCat->term_id,
+                    'posts_per_page' => -1
                 ));
+
+                if(!$childCats) {
+                    $childCats[0] = $currentCat;
+                }
             ?>
             <?php foreach ($childCats as $key => $value) : ?>
                 <article class="menu-article uk-article">
