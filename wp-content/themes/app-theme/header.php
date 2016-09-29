@@ -38,6 +38,8 @@
 						</section>
 						<nav class="b-nav uk-navbar">
 							<?php
+								$navItems = wp_get_nav_menu_items('main');
+
 								wp_nav_menu(array(
 									'container' => false,
 									'menu_class' => 'uk-navbar-nav'

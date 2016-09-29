@@ -633,7 +633,7 @@ a:hover {
 	color: #f4efd5;
 	font-size: 20px;
 	line-height: 36px;
-	text-transform: uppercase;
+	text-transform: uppercase; 
 	font-weight: 600;
 	position: relative;
 }
