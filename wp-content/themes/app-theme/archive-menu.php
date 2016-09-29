@@ -19,6 +19,13 @@ get_sidebar();
             </a>
         </div>
 
+        <?php $afisha = get_page_by_path('afisha'); ?>
+        <div class="b-page__info -margin-top-40">
+            <a href="<?=get_permalink($afisha->ID)?>">
+                <img src="<?=get_the_post_thumbnail_url($afisha->ID); ?>" alt="" class="-img-responsive">
+            </a>
+        </div>
+
         <?php
             $parentCat = get_category_by_slug('menu');
 

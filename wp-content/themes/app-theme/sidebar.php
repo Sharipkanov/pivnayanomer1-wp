@@ -2,7 +2,7 @@
 	<!-- Sidebar block -->
 	<article class="b-widget__recommend uk-article">
 		<div class="widget-meta-title-wrap">
-			<p class="widget-meta-title">РЕКОМЕНДУЕМ</p>
+			<p class="widget-meta-title"><span class="hamburger left"><i></i><i></i><i></i></span>РЕКОМЕНДУЕМ<span class="hamburger right"><i></i><i></i><i></i></span></p>
 		</div>
 		<p class="uk-article-lead">
 			Фахитос с пшеничными лепешками (подается в чугунной сковородке с соусом "Гуакамоле","Сальса"

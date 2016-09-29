@@ -32,17 +32,17 @@
 						<section class="b-header__info uk-clearfix">
 							<p class="b-header__info_text -text-large uk-float-left uk-clearfix">
 								<i class="fri fri-phone"></i>
-								<span><?=get_field('header_phone', 4);?></span>
+								<a href="tel:<?=get_field('header_phone', 4);?>"><span><?=get_field('header_phone', 4);?></span></a>
 							</p>
 							<a href="http://instagram.com/pivnayanomer1" class="uk-float-right instagram-wrap" target="_blank"><i class="fri fri-instagram"></i></a>
 						</section>
-						<?php $navItems = wp_get_nav_menu_items('main'); ?>
 						<nav class="b-nav uk-navbar">
-							<ul class="uk-navbar-nav">
-								<?php foreach($navItems as $key => $val) : ?>
-									<li><a href="<?=$val->url; ?>"><?=$val->title; ?></a></li>
-								<?php endforeach; ?>
-							</ul>
+							<?php
+								wp_nav_menu(array(
+									'container' => false,
+									'menu_class' => 'uk-navbar-nav'
+								));
+							?>
 						</nav>
 						<section class="b-header__info">
 							<p class="b-header__info_text uk-clearfix">

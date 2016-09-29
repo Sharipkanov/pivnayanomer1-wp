@@ -7,6 +7,13 @@
     </a>
 </div>
 
+<?php $afisha = get_page_by_path('afisha'); ?>
+<div class="b-page__info -margin-top-40">
+    <a href="<?=get_permalink($afisha->ID)?>">
+        <img src="<?=get_the_post_thumbnail_url($afisha->ID); ?>" alt="" class="-img-responsive">
+    </a>
+</div>
+
 <?php $pageNavItems = wp_get_nav_menu_items('page-menu'); ?>
 
 <ul class="uk-list page-list normal-content">

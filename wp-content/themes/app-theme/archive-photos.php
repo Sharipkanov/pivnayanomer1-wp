@@ -19,6 +19,13 @@ get_sidebar();
             </a>
         </div>
 
+        <?php $afisha = get_page_by_path('afisha'); ?>
+        <div class="b-page__info -margin-top-40">
+            <a href="<?=get_permalink($afisha->ID)?>">
+                <img src="<?=get_the_post_thumbnail_url($afisha->ID); ?>" alt="" class="-img-responsive">
+            </a>
+        </div>
+
         <?php
             $galleries = get_posts(array(
                 'post_type' => 'photos',
@@ -47,8 +54,7 @@ get_sidebar();
             <?php endforeach; ?>
         </ul>
 
-        <div class="gallery-grid uk-grid uk-grid-width-small-1-3 uk-grid-width-medium-1-5"
-             data-uk-grid-margin="">
+        <div class="gallery-grid">
             <?php
                 if(isset($_GET['p'])) {
                     foreach ($galleries as $key => $val) {

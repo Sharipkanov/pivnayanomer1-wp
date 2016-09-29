@@ -6,6 +6,12 @@
 		<img src="<?=get_the_post_thumbnail_url(get_the_ID()); ?>" alt="" class="-img-responsive">
 	</a>
 </div>
+<?php $afisha = get_page_by_path('afisha'); ?>
+<div class="b-page__info -margin-top-40">
+	<a href="<?=get_permalink($afisha->ID)?>">
+		<img src="<?=get_the_post_thumbnail_url($afisha->ID); ?>" alt="" class="-img-responsive">
+	</a>
+</div>
 <div class="b-widget__news uk-grid uk-grid-collapse uk-grid-match uk-grid-width-small-1-1 uk-grid-width-medium-1-2">
 	<?php
 		$last_news = get_posts(array(
