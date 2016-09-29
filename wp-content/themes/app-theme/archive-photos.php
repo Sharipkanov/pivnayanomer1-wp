@@ -13,8 +13,10 @@ get_sidebar();
     <div class="uk-width small-1-1 uk-width-medium-2-3">
 
         <div class="b-page__info">
-            <h2 class="b-page__info_title">Фото</h2>
-            <img src="<?php bloginfo('template_url'); ?>/images/photos-page-img.jpg" alt="" class="-img-responsive">
+            <a href="/photos/">
+                <h2 class="b-page__info_title">Фото</h2>
+                <img src="<?php bloginfo('template_url'); ?>/images/photos-page-img.jpg" alt="" class="-img-responsive">
+            </a>
         </div>
 
         <?php

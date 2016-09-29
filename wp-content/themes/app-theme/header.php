@@ -5,7 +5,7 @@
 	<meta name="viewport"
 	      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Title goes here...</title>
+	<title>Ресторан-пивоварня «Пивная №1»</title>
 
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="<?php bloginfo('template_url')?>/bower_components/uikit/css/uikit.min.css">
@@ -34,7 +34,7 @@
 								<i class="fri fri-phone"></i>
 								<span><?=get_field('header_phone', 4);?></span>
 							</p>
-							<a href="#" class="uk-float-right"><i class="fri fri-instagram"></i></a>
+							<a href="http://instagram.com/pivnayanomer1" class="uk-float-right instagram-wrap" target="_blank"><i class="fri fri-instagram"></i></a>
 						</section>
 						<?php $navItems = wp_get_nav_menu_items('main'); ?>
 						<nav class="b-nav uk-navbar">

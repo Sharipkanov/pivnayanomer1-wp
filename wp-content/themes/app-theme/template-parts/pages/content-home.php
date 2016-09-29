@@ -1,8 +1,10 @@
 <!-- Block content -->
 
 <div class="b-page__info">
-	<h2 class="b-page__info_title">Пивная №1</h2>
-	<img src="<?=get_the_post_thumbnail_url(get_the_ID()); ?>" alt="" class="-img-responsive">
+	<a href="/">
+		<h2 class="b-page__info_title">Пивная №1</h2>
+		<img src="<?=get_the_post_thumbnail_url(get_the_ID()); ?>" alt="" class="-img-responsive">
+	</a>
 </div>
 <div class="b-widget__news uk-grid uk-grid-collapse uk-grid-match uk-grid-width-small-1-1 uk-grid-width-medium-1-2">
 	<?php

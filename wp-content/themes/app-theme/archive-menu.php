@@ -13,8 +13,10 @@ get_sidebar();
     <div class="uk-width small-1-1 uk-width-medium-2-3">
 
         <div class="b-page__info">
-            <h2 class="b-page__info_title">Меню</h2>
-            <img src="<?php bloginfo('template_url'); ?>/images/menu-page-img.jpg" alt="" class="-img-responsive">
+            <a href="/menu/">
+                <h2 class="b-page__info_title">Меню</h2>
+                <img src="<?php bloginfo('template_url'); ?>/images/menu-page-img.jpg" alt="" class="-img-responsive">
+            </a>
         </div>
 
         <?php
@@ -22,8 +24,8 @@ get_sidebar();
 
             $menuCats = get_categories(array(
                 'parent'  => $parentCat->term_id,
-                'order' => 'DESC',
-                'posts_per_page' => -1
+                'posts_per_page' => -1,
+                'orderby' => 'date'
             ));
         ?>
 
@@ -45,58 +47,76 @@ get_sidebar();
                 <li class="<?=$active;?>"><a href="<?=$url; ?>"><?=$val->description; ?></a></li>
             <?php endforeach; ?>
         </ul>
-            <?php
-                if(isset($_GET['p'])) {
-                    foreach ($menuCats as $key => $val) {
-                        if($_GET['p'] == $val->slug) $currentCat = $val;
-                    }
-                } else $currentCat = $menuCats[0];
-
-                $childCats = get_categories(array(
-                    'parent'  => $currentCat->term_id,
-                    'posts_per_page' => -1
-                ));
-
-                if(!$childCats) {
-                    $childCats[0] = $currentCat;
+        <?php
+            if(isset($_GET['p'])) {
+                foreach ($menuCats as $key => $val) {
+                    if($_GET['p'] == $val->slug) $currentCat = $val;
                 }
-            ?>
-            <?php foreach ($childCats as $key => $value) : ?>
-                <article class="menu-article uk-article">
-                    <h3 class="uk-article-title"><?=$value->name; ?></h3>
+            } else $currentCat = $menuCats[0];
 
-                    <?php
-                        $products = get_posts(array(
-                            'post_type' => 'menu',
-                            'posts_per_page' => -1,
-                            'order' => 'ASC',
-                            'category' => $value->term_id
-                        ));
-                    ?>
+            $childCats = get_categories(array(
+                'parent'  => $currentCat->term_id,
+                'posts_per_page' => -1
+            ));
 
-                    <ul class="uk-list">
-                        <?php foreach ($products as $productKey => $productVal) : ?>
-                            <?php $productTag = wp_get_post_tags($productVal->ID); ?>
-                            <?php $productImg = get_the_post_thumbnail_url($productVal->ID); ?>
+            if(!$childCats) {
+                $childCats[0] = $currentCat;
+            }
+        ?>
+        <?php foreach ($childCats as $key => $value) : ?>
+            <article class="menu-article uk-article">
+                <h3 class="uk-article-title"><?=$value->name; ?></h3>
+
+                <?php
+                    $tempProducts = get_posts(array(
+                        'post_type' => 'menu',
+                        'posts_per_page' => -1,
+                        'order' => 'ASC',
+                        'category' => $value->term_id
+                    ));
+
+                    $products = array();
+                ?>
+
+                <ul class="uk-list">
+                    <?php foreach ($tempProducts as $productKey => $productVal) : ?>
+
+                        <?php $productTag = wp_get_post_tags($productVal->ID);?>
+                        <?php
+                            $productImg = get_the_post_thumbnail_url($productVal->ID);
+                            $imageAlt = get_post_meta( get_post_thumbnail_id($productVal->ID), '_wp_attachment_image_alt', true);
+                            $productVal->image_src = $productImg;
+                            $productVal->image_alt = $imageAlt;
+                            $products[$productTag[0]->name][$productKey] = $productVal;
+                            $products[$productTag[0]->name][$productKey] = $productVal;
+                        ?>
+                    <?php endforeach; ?>
+
+                    <?php foreach ($products as $productKey => $productVal) : ?>
+                        <?php if($productKey != '') :?>
+                            <li class="tag_article"><?=$productKey;?></li>
+                        <?php endif; ?>
+                        <?php foreach ($productVal as $key => $val) : ?>
                             <li>
-                                <span>
-                                    <?php if($productImg): ?>
-                                        <a href="<?=$productImg;?>" data-uk-lightbox><i class="fri fri-photo"></i></a>
-                                        <?php echo '&nbsp;';?>
-                                    <?php endif; ?>
-                                    <?=types_render_field( "product-title", array("id" => $productVal->ID) ); ?>
-                                </span>
+                        <span>
+                            <?php if($val->image_src): ?>
+                                <a href="<?=$val->image_src;?>" title="<?=$val->image_alt; ?>" data-uk-lightbox><i class="fri fri-photo"></i></a>
+                                <?php echo '&nbsp;';?>
+                            <?php endif; ?>
+                            <?=types_render_field( "product-title", array("id" => $val->ID) ); ?>
+                        </span>
                                 <span class="has-dots"><i></i></span>
-                                <span class="price"><?=types_render_field( "product-price", array("id" => $productVal->ID) ); ?></span>
+                                <span class="price"><?=types_render_field( "product-price", array("id" => $val->ID) ); ?></span>
                             </li>
-                            <?php $productExcerpt =  types_render_field( "product-excerpt", array("id" => $productVal->ID) ); ?>
+                            <?php $productExcerpt =  types_render_field( "product-excerpt", array("id" => $val->ID) ); ?>
                             <?php if($productExcerpt) : ?>
                                 <p class="product-excerpt"><?=$productExcerpt; ?></p>
                             <?php endif; ?>
                         <?php endforeach; ?>
-                    </ul>
-                </article>
-            <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </ul>
+            </article>
+        <?php endforeach; ?>
     </div>
 
 <?php
