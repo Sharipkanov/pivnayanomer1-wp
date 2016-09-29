@@ -38,8 +38,6 @@
 						</section>
 						<nav class="b-nav uk-navbar">
 							<?php
-								$navItems = wp_get_nav_menu_items('main');
-
 								wp_nav_menu(array(
 									'container' => false,
 									'menu_class' => 'uk-navbar-nav'
@@ -58,11 +56,12 @@
 
 			<div id="mobile-nav" class="uk-offcanvas">
 				<div class="uk-offcanvas-bar">
-					<ul class="uk-nav">
-						<?php foreach($navItems as $key => $val) : ?>
-							<li><a href="<?=$val->url; ?>"><?=$val->title; ?></a></li>
-						<?php endforeach; ?>
-					</ul>
+					<?php
+						wp_nav_menu(array(
+							'container' => false,
+							'menu_class' => 'uk-nav'
+						));
+					?>
 				</div>
 			</div>
 			<!-- Header block end -->
